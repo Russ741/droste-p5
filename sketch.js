@@ -11,6 +11,19 @@ class Shape {
         this.color = color;
     }
 }
+
+class Recursion {
+    relX;
+    relY;
+    relR;
+
+    constructor(shape) {
+        this.relX = shape.relX;
+        this.relY = shape.relY;
+        this.relR = shape.relR;
+    }
+}
+
 const hs2 = 0.5/Math.sqrt(2);
 
 // TODO: Specify shapes and recursions separately.
@@ -21,6 +34,11 @@ const shapes = [
     new Shape(hs2, -hs2, .25, "black"),
     new Shape(-hs2, hs2, .25, "black")
 ];
+
+const recursions = [
+    new Recursion(shapes[3]),
+    new Recursion(shapes[4])
+]
 
 const recurseMillis = 2000;
 const recurseRatio = shapes.slice(-1)[0].relR;
@@ -42,10 +60,10 @@ function drawRecursive(r, x, y) {
         fill(shape.color);
         circle(shape.relX * r + x, shape.relY * r + y, 2 * shape.relR * r);
     }
-    const recurseShape = shapes.slice(-1)[0];
-    const nextX = r * recurseShape.relX + x;
-    const nextY = r * recurseShape.relY + y;
-    drawRecursive(recurseRatio * r, nextX, nextY);
+
+    for (const recursion of recursions) {
+        drawRecursive(r * recursion.relR, r * recursion.relX + x, r * recursion.relY + y);
+    }
 }
 
 function draw() {
