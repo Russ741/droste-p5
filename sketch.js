@@ -3,8 +3,6 @@ function setup() {
     height = 500;
     createCanvas(width, height);
     startTime = millis();
-
-    loop();
 }
 
 function drawRecursive(r) {
