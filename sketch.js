@@ -1,3 +1,26 @@
+class Shape {
+    relX;
+    relY;
+    relD;
+    color;
+
+    constructor(relX, relY, relD, color) {
+        this.relX = relX;
+        this.relY = relY;
+        this.relD = relD;
+        this.color = color;
+    }
+}
+
+const shapes = [
+    new Shape(0, 0, 1, "black"),
+    new Shape(0, 0, .5, "white"),
+    new Shape(0, 0, .25, "black")
+];
+
+const recurseMillis = 2000;
+const recurseRatio = shapes.slice(-1)[0].relD;
+
 function setup() {
     width = 500;
     height = 500;
@@ -6,18 +29,15 @@ function setup() {
     noStroke();
 }
 
-const recurseMillis = 2000;
-const recurseRatio = 0.1875;
-
 function drawRecursive(d) {
     if (d < 0.25) {
         // Too small to be worth drawing; stop
         return;
     }
-    fill(0);
-    circle(0, 0, 0.75 * d);
-    fill(255);
-    circle(0, 0, 0.375 * d);
+    for (const shape of shapes) {
+        fill(shape.color);
+        circle(shape.relX * d, shape.relY * d, shape.relD * d);
+    }
     drawRecursive(recurseRatio * d);
 }
 
