@@ -1,13 +1,13 @@
 class Shape {
     relX;
     relY;
-    relD;
+    relR;
     color;
 
-    constructor(relX, relY, relD, color) {
+    constructor(relX, relY, relR, color) {
         this.relX = relX;
         this.relY = relY;
-        this.relD = relD;
+        this.relR = relR;
         this.color = color;
     }
 }
@@ -19,7 +19,7 @@ const shapes = [
 ];
 
 const recurseMillis = 2000;
-const recurseRatio = shapes.slice(-1)[0].relD;
+const recurseRatio = shapes.slice(-1)[0].relR;
 
 function setup() {
     width = 500;
@@ -29,16 +29,16 @@ function setup() {
     noStroke();
 }
 
-function drawRecursive(d) {
-    if (d < 0.25) {
+function drawRecursive(r) {
+    if (r < 0.25) {
         // Too small to be worth drawing; stop
         return;
     }
     for (const shape of shapes) {
         fill(shape.color);
-        circle(shape.relX * d, shape.relY * d, shape.relD * d);
+        circle(shape.relX * r, shape.relY * r, 2 * shape.relR * r);
     }
-    drawRecursive(recurseRatio * d);
+    drawRecursive(recurseRatio * r);
 }
 
 function draw() {
@@ -48,7 +48,7 @@ function draw() {
 
     const loopProgress = elapsedMillis % recurseMillis / recurseMillis;
     const zoom = (1 / recurseRatio) ** (loopProgress);
-    drawRecursive(2 * height * zoom);
+    drawRecursive(height * zoom);
 }
 
 // Don't need to call new js(); here - https://github.com/processing/p5.js/issues/4985
