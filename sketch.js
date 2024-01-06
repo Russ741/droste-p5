@@ -23,11 +23,8 @@ function draw() {
     translate(width/2, height/2);
     time = millis();
 
-    // zoom = (time / 3000) ** 2;
-    // drawRecursive(height * zoom);
-
-    fill(0);
-    circle(random(-width/2, width/2), random(-height/2, height/2), 50);
+    zoom = 2 ** (time / 1000);
+    drawRecursive(height * zoom);
 }
 
 // Don't need to call new js(); here - https://github.com/processing/p5.js/issues/4985
