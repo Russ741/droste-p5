@@ -2,7 +2,7 @@ function setup() {
     width = 500;
     height = 500;
     createCanvas(width, height);
-    startTime = millis();
+    startMillis = millis();
 }
 
 function drawRecursive(d) {
@@ -21,9 +21,9 @@ function drawRecursive(d) {
 function draw() {
     background(255);
     translate(width/2, height/2);
-    time = millis();
+    const elapsedMillis = millis() - startMillis;
 
-    zoom = 2 ** (time / 1000);
+    const zoom = 2 ** (elapsedMillis / 1000);
     drawRecursive(height * zoom);
 }
 
