@@ -3,6 +3,7 @@ function setup() {
     height = 500;
     createCanvas(width, height);
     startMillis = millis();
+    noStroke();
 }
 
 const recurseMillis = 2000;
