@@ -41,11 +41,13 @@ const recursions = [
 ]
 
 const recurseMillis = 2000;
-const recurseRatio = shapes.slice(-1)[0].relR;
 
 function setup() {
     width = 500;
     height = 500;
+    loopRatio = 1;
+    loopRatio = recursions.reduce((acc, cur) => acc * cur.relR, loopRatio);
+    loopMillis = recursions.length * recurseMillis;
     createCanvas(width, height);
     startMillis = millis();
     noStroke();
@@ -71,17 +73,20 @@ function draw() {
     translate(width/2, height/2);
     const elapsedMillis = millis() - startMillis;
 
-    const loopProgress = elapsedMillis % recurseMillis / recurseMillis;
-    const zoom = (1 / recurseRatio) ** (loopProgress);
+    const loopProgress = elapsedMillis % loopMillis / loopMillis;
+    const step = floor(loopProgress * recursions.length);
+
+    const recursion = recursions[step];
+    const stepProgress = loopProgress * recursions.length % 1;
+    const stepRatio = recursion.relR;
+
+    const zoom = 1 + stepProgress * (1 / stepRatio - 1);
     const r = height / 2 * zoom;
 
-    const recurseShape = shapes.slice(-1)[0];
-    // Formula for the nth term of a geometric series; this won't work for co-recursion, but it looks good for now.
-    const translationProgress = (1 - recurseRatio ** loopProgress) / (1 - recurseRatio);
-    const endX = -recurseShape.relX * r;
-    const curX = endX * translationProgress;
-    const endY = -recurseShape.relY * r;
-    const curY = endY * translationProgress;
+    const endX = -recursion.relX * r;
+    const curX = endX * stepProgress;
+    const endY = -recursion.relY * r;
+    const curY = endY * stepProgress;
     drawRecursive(r, curX, curY);
 }
 
