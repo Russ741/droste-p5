@@ -78,15 +78,17 @@ function draw() {
 
     const recursion = recursions[step];
     const stepProgress = loopProgress * recursions.length % 1;
+    const sinProgress = sin(stepProgress * PI / 2)
+
     const stepRatio = recursion.relR;
 
-    const zoom = 1 + stepProgress * (1 / stepRatio - 1);
+    const zoom = 1 + sinProgress * (1 / stepRatio - 1);
     const r = height / 2 * zoom;
 
     const endX = -recursion.relX * r;
-    const curX = endX * stepProgress;
+    const curX = endX * sinProgress;
     const endY = -recursion.relY * r;
-    const curY = endY * stepProgress;
+    const curY = endY * sinProgress;
     drawRecursive(r, curX, curY);
 }
 
