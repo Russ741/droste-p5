@@ -82,7 +82,7 @@ function draw() {
 
     const stepRatio = recursion.relR;
 
-    const zoom = 1 + sinProgress * (1 / stepRatio - 1);
+    const zoom = 1 + stepProgress * (1 / stepRatio - 1);
     const r = height / 2 * zoom;
 
     const endX = -recursion.relX * r;
