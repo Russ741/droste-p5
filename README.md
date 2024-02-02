@@ -25,10 +25,12 @@ I then restructured the code to implement [mutual recursion](https://en.wikipedi
   * My current solution is to have lateral translation implemented as a half-sinusoid, so that the translational velocity when of "reaching" a given shape is zero.
     * This approach still leads to some "jerking"; it'd be nice to substitute it with some sort of multipoint smoothed curve, though I'm not sure how to make sure the initial and terminal velocities match.
 
-# Extensions
+# Future Direction
 
 Modulo the issues noted above, the current approach to mutual recursion does not limit the number, size, configuration or color of the corecursive shapes.
 
 It would be neat to build a demonstration with three corecursive shapes in a triangle, large and small shapes, randomized configurations, colors.
 
 Animated color gradients could be a really viscerally pleasing effect.
+
+It'd also be neat to have a gallery of the different phases in development; some of the "incomplete" versions are appealing in their own right.
