@@ -2,6 +2,8 @@
 
 A progression of animated riffs on the [Droste effect](https://en.wikipedia.org/wiki/Droste_effect).
 
+![A still image from the Droste P5 animation.](/droste-p5.png)
+
 Check it out live [here](https://russ741.github.io/droste-p5/).
 
 # Development Notes
